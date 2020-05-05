@@ -8,42 +8,42 @@ export default class Home extends React.Component {
         this.state = {
             url: '',
             copy: null,
-            buttonText: "Shorten",
+            buttonText: "Screenshot",
             error: null,
             clicks: null
         };
 
-        StatsController.mostClicked().then((response) => {
-            this.setState({clicks: response.data});
-        });
+        // StatsController.mostClicked().then((response) => {
+        //     this.setState({ clicks: response.data });
+        // });
     }
 
     render() {
         return (
             <div className="Home container">
-                <h1 className="topic">Extremely powerful URL Shortener with open stats.</h1>
+                <h1 className="topic">Get a web page screenshot in just few seconds!</h1>
 
                 <div className="col-sm-12 col-md-8 offset-md-2">
                     <div id="url">
                         <div id="url-input">
                             <input type="url" name="url" value={this.state.url} onChange={(e) => {
                                 this.inputValueChange(e.target.value)
-                            }} placeholder="Paste a long URL" required/>
+                            }} placeholder="Paste a page URL" required />
                             <p className="error">{this.state.error}</p>
                         </div>
                         <button id={this.state.copy} onClick={() => {
                             this.shrink()
                         }} className="buttonmain">{this.state.buttonText}</button>
                         {this.state.copy &&
-                        <button onClick={() => {
-                            this.reset()
-                        }} className="buttonmain">Reset</button>
+                            <button onClick={() => {
+                                this.reset()
+                            }} className="buttonmain">Reset</button>
                         }
                     </div>
                 </div>
 
-                <h2>• Mostly clicked shorted links</h2>
-                <div className="col-sm-12 col-md-10 offset-md-1">
+                {/* <h2>• Mostly clicked shorted links</h2> */}
+                {/* <div className="col-sm-12 col-md-10 offset-md-1">
                     <table className="table table-borderless text-left table-responsive">
                         <thead>
                         <tr>
@@ -75,7 +75,7 @@ export default class Home extends React.Component {
                         </tbody>
                     </table>
                     <a className="stat" href="/stats">View more statistics →</a>
-                </div>
+                </div> */}
             </div>
         );
     }
@@ -90,8 +90,8 @@ export default class Home extends React.Component {
     };
 
     inputValueChange = (value) => {
-        this.setState({url: value});
-        this.setState({error: ''});
+        this.setState({ url: value });
+        this.setState({ error: '' });
     };
 
     shrink = () => {
@@ -103,32 +103,32 @@ export default class Home extends React.Component {
             document.execCommand('copy');
             document.body.removeChild(input);
 
-            this.setState({buttonText: "Copied!"});
+            this.setState({ buttonText: "Copied!" });
             setTimeout(
                 function () {
-                    this.setState({buttonText: "Copy to Clipboard"});
+                    this.setState({ buttonText: "Copy to Clipboard" });
                 }.bind(this),
                 1000
             );
         } else {
             if (this.state.url === '') {
-                this.setState({error: "URL field is required."});
+                this.setState({ error: "URL field is required." });
             } else if (!this.validURL(this.state.url)) {
-                this.setState({error: "URL entered is invalid."});
+                this.setState({ error: "URL entered is invalid." });
             } else {
                 UrlController.shortener(this.state.url).then((response) => {
-                    this.setState({url: response.data});
-                    this.setState({copy: "copy"});
-                    this.setState({buttonText: "Copy to Clipboard"});
+                    this.setState({ url: response.data });
+                    this.setState({ copy: "copy" });
+                    this.setState({ buttonText: "Copy to Clipboard" });
                 });
             }
         }
     };
 
     reset = () => {
-        this.setState({copy: null});
-        this.setState({url: ''});
-        this.setState({buttonText: "Shorten"});
+        this.setState({ copy: null });
+        this.setState({ url: '' });
+        this.setState({ buttonText: "Screenshot" });
     };
 
     validURL = (str) => {

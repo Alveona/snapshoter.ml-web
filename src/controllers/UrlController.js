@@ -4,7 +4,7 @@ class UrlController {
     shortener = async (url) => {
         return await axios.post(
             'https://devro.club/api/shortener',
-            JSON.stringify({url: url})
+            JSON.stringify({ url: url })
         );
     };
 
