@@ -11,8 +11,9 @@ export default class Home extends React.Component {
             buttonText: "Screenshot",
             error: null,
             clicks: null,
-            imgVisible: false,
-            imgUrl: null
+            imgVisible: true,
+            // imgUrl: null
+            imgUrl: "https://cloud.alveona.ml/files/3cf2c7bf964e4c448b37186b0eba8263page_screenshot.png"
         };
 
         // StatsController.mostClicked().then((response) => {
@@ -44,11 +45,14 @@ export default class Home extends React.Component {
                     </div>
                 </div>
 
+
                 {/* <h2>• Mostly clicked shorted links</h2> */}
                 {console.log(this.state.imgVisible)}
                 {this.state.imgVisible ?
                     <div className="result-image-div">
+                        <div className="result-image-text">Click to Download</div>
                         <img className="result-image" src={this.state.imgUrl}></img>
+
                     </div> : null}
             </div>
         );
